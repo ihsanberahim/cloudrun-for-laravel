@@ -43,11 +43,26 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->reportable(function (Throwable $e) {
-            if (isset($_SERVER['GAE_SERVICE'])) {
-                // Ensure Stackdriver is initialized and handle the exception
-                Bootstrap::init();
-                Bootstrap::exceptionHandler($e);
-            }
+            ///
         });
+    }
+
+    /**
+     * Report or log an exception.
+     *
+     * @param  \Throwable  $e
+     * @return void
+     *
+     * @throws \Throwable
+     */
+    public function report(Throwable $e)
+    {
+        if (isset($_SERVER['GAE_SERVICE'])) {
+            // Ensure Stackdriver is initialized and handle the exception
+            Bootstrap::init();
+            Bootstrap::exceptionHandler($e);
+        } else {
+            parent::report($e);
+        }
     }
 }
