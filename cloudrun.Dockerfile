@@ -17,6 +17,7 @@ RUN cd /app \
     && npm i \
     && npm run build
 
+COPY cloudrun/php.ini-production /usr/local/etc/php/php.ini
 
 RUN chown -R www-data: /app
 
