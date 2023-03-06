@@ -699,8 +699,8 @@ post_max_size = 8M
 
 ; Automatically add files before PHP document.
 ; https://php.net/auto-prepend-file
-; auto_prepend_file =
-auto_prepend_file='/app/vendor/google/cloud-error-reporting/src/prepend.php'
+auto_prepend_file =
+; auto_prepend_file='/app/vendor/google/cloud-error-reporting/src/prepend.php'
 
 ; By default, PHP will output a media type using the Content-Type header. To
 ; disable this, simply set it to be empty.
