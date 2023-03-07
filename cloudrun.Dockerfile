@@ -27,6 +27,9 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Npm
 ENV NVM_DIR /usr/local/nvm
+
+# check recommended node version from vite docs site
+# https://vitejs.dev/guide/#scaffolding-your-first-vite-project
 ENV NODE_VERSION 16.19.1
 
 # Install nvm with node and npm
@@ -52,12 +55,6 @@ RUN pecl install -o -f redis \
 &&  rm -rf /tmp/pear \
 &&  docker-php-ext-enable redis
 
-# For Wordpress
-# RUN docker-php-ext-install mysqli
-# RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-# RUN chmod +x wp-cli.phar
-# RUN mv wp-cli.phar /usr/local/bin/wp
-
 #For Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
@@ -70,8 +67,8 @@ RUN npm i
 RUN mkdir -p /var/www/html/public/build
 RUN chmod -R 777 /var/www/html/public/build
 RUN npm run build
-RUN chown -R www-data: /var/www/html
 
+RUN chown -R www-data: /var/www/html
 
 # Use the PORT environment variable in Apache configuration files.
 # https://cloud.google.com/run/docs/reference/container-contract#port
@@ -83,4 +80,4 @@ RUN a2enmod rewrite
 # Switch to the production php.ini for production operations.
 # RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 # https://github.com/docker-library/docs/blob/master/php/README.md#configuration
-RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
