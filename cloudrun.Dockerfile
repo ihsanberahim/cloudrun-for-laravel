@@ -27,7 +27,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Npm
 ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 12.22.1
+ENV NODE_VERSION 16.19.1
 
 # Install nvm with node and npm
 SHELL ["/bin/bash", "--login", "-c"]
@@ -63,8 +63,13 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 WORKDIR /var/www/html
 COPY . ./
+
 RUN composer install
-# RUN npm i && npm run build
+RUN npm i
+
+RUN mkdir -p /var/www/html/public/build
+RUN chmod -R 777 /var/www/html/public/build
+RUN npm run build
 RUN chown -R www-data: /var/www/html
 
 
