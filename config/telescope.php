@@ -4,7 +4,7 @@ use Laravel\Telescope\Http\Middleware\Authorize;
 use Laravel\Telescope\Watchers;
 
 return [
-    'emails' => explode(',', env('TELESCOPE_EMAILS', '')),
+    'emails' => env('TELESCOPE_EMAILS', ''),
 
     /*
     |--------------------------------------------------------------------------
