@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use Google\Cloud\Core\Report\SimpleMetadataProvider;
 use Google\Cloud\ErrorReporting\Bootstrap;
+use Google\Cloud\Logging\LoggingClient;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -43,11 +45,7 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->reportable(function (Throwable $e) {
-            if (isset($_SERVER['GAE_SERVICE'])) {
-                // Ensure Stackdriver is initialized and handle the exception
-                Bootstrap::init();
-                Bootstrap::exceptionHandler($e);
-            }
+            ///
         });
     }
 }
