@@ -5,6 +5,8 @@
 # Exclude locally vendored dependencies.
 vendor/
 node_modules/
+public/vendor/
+public/build/
 
 # Exclude "build-time" ignore files.
 .dockerignore

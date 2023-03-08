@@ -68,6 +68,8 @@ RUN mkdir -p /var/www/html/public/build
 RUN chmod -R 777 /var/www/html/public/build
 RUN npm run build
 
+RUN php artisan telescope:install
+
 RUN chown -R www-data: /var/www/html
 
 # Use the PORT environment variable in Apache configuration files.
